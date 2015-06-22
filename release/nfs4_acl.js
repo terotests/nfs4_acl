@@ -234,9 +234,12 @@ POSIX user/group/other distinctions used in, e.g., chmod(1).
 */
     });
     _myTrait_.map = function(fn) {
+
+      if (this._acl.length == 0) return this;
+
       var list = this._acl.split("\n");
       var newList = list.map(this.toObject).map(fn).map(this.fromObject);
-      this._acl = newList.join("\n");
+      this._acl = newList.join("\n").trim();
       return this;
 
     }
@@ -244,11 +247,13 @@ POSIX user/group/other distinctions used in, e.g., chmod(1).
 
       var len = this._acl.length;
 
-      if (this._acl.charAt(len - 1) == "\n") {
+      if ((len == 0) || this._acl.charAt(len - 1) == "\n") {
         this._acl += line;
       } else {
         this._acl += "\n" + line;
       }
+
+      this._acl = this._acl.trim();
     }
     _myTrait_.reduce = function(fn, initialValue) {
       var list = this._acl.split("\n");
@@ -256,6 +261,9 @@ POSIX user/group/other distinctions used in, e.g., chmod(1).
       this._acl = list.join("\n");
 
       return this;
+    }
+    _myTrait_.removeAll = function(t) {
+      this._acl = "";
     }
     _myTrait_.removePermission = function(obj, flags) {
 
