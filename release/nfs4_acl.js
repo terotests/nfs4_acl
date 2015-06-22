@@ -108,6 +108,9 @@ var nfs4_acl_prototype = function() {
     _myTrait_.fromObject = function(obj) {
       return obj.type + ":" + obj.flags + ":" + obj.principal + ":" + obj.permissions;
     }
+    _myTrait_.getACL = function(t) {
+      return this._acl;
+    }
     _myTrait_.has = function(username, rolename, rule) {
 
       var i = 0,

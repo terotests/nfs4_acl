@@ -87,6 +87,12 @@ acl.allowGroup("abcd", "r");
 acl.denyGroup("abcd", "waxTC");   
 ```
 
+## Reading the ACL as String
+
+```javascript
+acl.getACL();
+```
+
 
 # Memory conservation and speed - alternative approaches
 
