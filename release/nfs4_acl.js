@@ -5,8 +5,8 @@ var nfs4_acl_prototype = function() {
 
       var i = 0,
         line_i = 0,
-        type_i = 0;
-      length = this._acl.length;
+        type_i = 0,
+        length = this._acl.length;
 
       var type, flags, principal, permissions, flag, bGroup = false,
         uni = 0,
