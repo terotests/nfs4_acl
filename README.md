@@ -66,13 +66,13 @@ NOTE: Modifying the ACL is not memory -optimized. Strings are allocated and so o
 ## Adding permissions to users
 
 ```javascript
-acl.allowUser("abcd", "rx");   
+acl.allowUser("abcd", "rtncyw");   
 ```
 
 ## Removing permissions from users
 
 ```javascript
-acl.denyUser("abcd", "r");   
+acl.denyUser("abcd", "rwx");   
 ```
 
 ## Adding permissions to groups
@@ -84,13 +84,8 @@ acl.allowGroup("abcd", "r");
 ## Removing permissions to groups
 
 ```javascript
-acl.debyGroup("abcd", "r");   
+acl.denyGroup("abcd", "waxTC");   
 ```
-
-
-
-
-
 
 
 # Memory conservation and speed - alternative approaches
