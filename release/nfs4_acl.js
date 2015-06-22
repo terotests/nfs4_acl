@@ -34,8 +34,6 @@ var nfs4_acl_prototype = function() {
       var did = false,
         me = this;
       this.map(function(o) {
-        console.log("--- checking the object ");
-        console.log(o);
         if (o.principal == username && !(o.flags.indexOf("g") >= 0)) {
           if (o.type == "A") {
             did = true;
