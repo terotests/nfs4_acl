@@ -10,7 +10,7 @@ The library tries to be a very conservative for the memory allocations, it avoid
 
 Minimalistic test-case run is here
 
-http://jsfiddle.net/4a9mynkw/
+http://jsfiddle.net/17y60qe0/
 
 # Initializing the ACL
 
