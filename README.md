@@ -42,6 +42,8 @@ For list of flags check: http://linux.die.net/man/5/nfs4_acl
 
 ## Checking for a multiple permission flags
 
+You can check for multiple flags like "rwx" with single command, the command will match positively only if all the flags are found.
+
 ```javascript
  if( acl.find("alice@nfsdomain.org", "", "rwx") ) {
     console.log("Alice has read, write and execute flags");
