@@ -58,6 +58,41 @@ You can check for multiple flags like "rwx" with single command, the command wil
  }
 ```
 
+# Modifying the ACL
+
+NOTE: Modifying the ACL is not memory -optimized. Strings are allocated and so on. But since it is assumed the ACL is assumed to be most of the time constant, it should not be a big problem.
+
+
+## Adding permissions to users
+
+```javascript
+acl.allowUser("abcd", "rx");   
+```
+
+## Removing permissions from users
+
+```javascript
+acl.denyUser("abcd", "r");   
+```
+
+## Adding permissions to groups
+
+```javascript
+acl.allowGroup("abcd", "r");   
+```
+
+## Removing permissions to groups
+
+```javascript
+acl.debyGroup("abcd", "r");   
+```
+
+
+
+
+
+
+
 # Memory conservation and speed - alternative approaches
 
 To consume less `node.js/io.js` memory the class could allocate ArrayBuffer for the ACL based on the reference implementation.

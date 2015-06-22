@@ -1,7 +1,116 @@
 var nfs4_acl_prototype = function() {
   'use strict';;
   (function(_myTrait_) {
+    _myTrait_.addPermission = function(obj, flags) {
+
+      for (var i = 0; i < flags.length; i++) {
+        var permission = flags[i];
+        if (obj.permissions.indexOf(permission) < 0)
+          obj.permissions += permission;
+      }
+    }
+    _myTrait_.allowGroup = function(groupName, flag) {
+      var did = false,
+        me = this;
+      this.map(function(o) {
+        if (o.principal == groupName && !(o.flags.indexOf("g") >= 0)) {
+          if (o.type == "A") {
+            did = true;
+            me.addPermission(o, flag);
+          }
+          if (o.type == "D") {
+            me.removePermission(o, flag);
+          }
+        }
+        return o;
+      });
+
+      if (!did) {
+        this.push("A:g:" + groupName + ":" + flag);
+      }
+    }
+    _myTrait_.allowUser = function(username, flag) {
+
+      var did = false,
+        me = this;
+      this.map(function(o) {
+        console.log("--- checking the object ");
+        console.log(o);
+        if (o.principal == username && !(o.flags.indexOf("g") >= 0)) {
+          if (o.type == "A") {
+            did = true;
+            me.addPermission(o, flag);
+          }
+          if (o.type == "D") {
+            me.removePermission(o, flag);
+          }
+        }
+        return o;
+      });
+
+      if (!did) {
+        this.push("A::" + username + ":" + flag);
+      }
+
+
+    }
+    _myTrait_.denyGroup = function(groupName, flag) {
+      var did = false,
+        me = this;
+      this.map(function(o) {
+        if (o.principal == groupName && !(o.flags.indexOf("g") >= 0)) {
+          did = true;
+          if (o.type == "A") {
+            me.removePermission(o, flag);
+          }
+          if (o.type == "D") {
+            me.addPermission(o, flag);
+          }
+        }
+        return o;
+      });
+
+      if (!did) {
+        this.push("D:g:" + groupName + ":" + flag);
+      }
+    }
+    _myTrait_.denyUser = function(username, flag) {
+
+      var did = false,
+        me = this;
+      this.map(function(o) {
+        if (o.principal == username && !(o.flags.indexOf("g") >= 0)) {
+
+          if (o.type == "A") {
+            me.removePermission(o, flag);
+          }
+          if (o.type == "D") {
+            did = true;
+            me.addPermission(o, flag);
+          }
+        }
+        return o;
+      });
+
+      if (!did) {
+        this.push("D::" + username + ":" + flag);
+      }
+
+    }
+    _myTrait_.filter = function(fn) {
+      var list = this._acl.split("\n");
+      list.filter(fn);
+      this._acl = list.join("\n");
+
+      return this;
+    }
     _myTrait_.find = function(username, rolename, rule) {
+      return this.has(username, rolename, rule);
+    }
+    _myTrait_.fromObject = function(obj) {
+      return obj.type + ":" + obj.flags + ":" + obj.principal + ":" + obj.permissions;
+    }
+    _myTrait_.has = function(username, rolename, rule) {
 
       var i = 0,
         line_i = 0,
@@ -113,7 +222,7 @@ var nfs4_acl_prototype = function() {
       _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
     if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
     _myTrait_.__traitInit.push(function(aclFile) {
-      this._acl = aclFile;
+      this._acl = aclFile.trim();
 
       // type:flags:principal:permissions
       // Types : A, D, U, L
@@ -124,6 +233,73 @@ or one of three special principals: 'OWNER@', 'GROUP@', and 'EVERYONE@', which a
 POSIX user/group/other distinctions used in, e.g., chmod(1).
 */
     });
+    _myTrait_.map = function(fn) {
+      var list = this._acl.split("\n");
+      var newList = list.map(this.toObject).map(fn).map(this.fromObject);
+      this._acl = newList.join("\n");
+      return this;
+
+    }
+    _myTrait_.push = function(line) {
+
+      var len = this._acl.length;
+
+      if (this._acl.charAt(len - 1) == "\n") {
+        this._acl += line;
+      } else {
+        this._acl += "\n" + line;
+      }
+    }
+    _myTrait_.reduce = function(fn, initialValue) {
+      var list = this._acl.split("\n");
+      list.reduce(fn, initialValue);
+      this._acl = list.join("\n");
+
+      return this;
+    }
+    _myTrait_.removePermission = function(obj, flags) {
+
+      for (var i = 0; i < flags.length; i++) {
+        var permission = flags[i];
+        if (obj.permissions.indexOf(permission) >= 0) {
+          obj.permissions = obj.permissions.replace(permission, "");
+        }
+      }
+
+
+    }
+    _myTrait_.replaceLines = function(fn) {
+
+      var list = this._acl.split("\n");
+
+      for (var i = 0; i < list.length; i++) {
+        var n = fn(list[i]);
+        if (n) list[i] = n;
+      }
+
+    }
+    _myTrait_.toObject = function(line) {
+      /*
+           A::OWNER@:rwatTnNcCy
+           A::alice@nfsdomain.org:rxtncy
+           A::bob@nfsdomain.org:rwadtTnNcCy
+           A:g:GROUP@:rtncy
+           D:g:GROUP@:waxTC
+           */
+
+      var obj = {};
+      if (!line) return obj;
+
+      var parts = line.split(":");
+      // var type, flags, principal, permissions,
+      if (line.length > 0) {
+        obj.type = line.charAt(0);
+        obj.flags = parts[1];
+        obj.principal = parts[2];
+        obj.permissions = parts[3];
+      }
+      return obj;
+    }
   }(this));
 }
 var nfs4_acl = function(a, b, c, d, e, f, g, h) {
