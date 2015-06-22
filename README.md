@@ -6,6 +6,12 @@ The library does not create the storage for the ACL, it will only check whether 
 
 The library tries to be a very conservative for the memory allocations, it avoids splitting strings or doing things that require allocation or de-allocating memory to avoid V8 garbage collection starting at the node.js server.
 
+# Example
+
+Minimalistic test-case run is here
+
+http://jsfiddle.net/1xynjga4/
+
 # Initializing the ACL
 
 ```javascript
