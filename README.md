@@ -34,12 +34,13 @@ For list of flags check: http://linux.die.net/man/5/nfs4_acl
  }
 ```
 
-## Checking multiple permissions
+## Checking group permissions
 
 ```javascript
- if( acl.find("alice@nfsdomain.org", "", "r") ) {
-    console.log("Alice has read access");
+ if( acl.find("", "GROUP@", "r") ) {
+    console.log("Group has read access");
  }
+```
 
 # Alternative approaches
 

@@ -12,6 +12,8 @@ var nfs4_acl_prototype = function() {
         uni = 0,
         uni_match = false,
         uni_failed = false,
+        mCnt = 0,
+        mokCnt = 0,
         ignore_line = false;
 
       /*
@@ -21,6 +23,7 @@ var nfs4_acl_prototype = function() {
            A:g:GROUP@:rtncy
            D:g:GROUP@:waxTC
            */
+      debugger;
 
       while (i < length) {
 
@@ -38,6 +41,12 @@ var nfs4_acl_prototype = function() {
         }
 
         if (line_i == 0) {
+
+          if (mokCnt > 0 && (rule.length == mokCnt)) {
+            if (type == "A") return true;
+            if (type == "D") return false;
+          }
+
           ignore_line = false;
           type = this._acl.charAt(i);
           line_i++;
@@ -45,6 +54,8 @@ var nfs4_acl_prototype = function() {
           uni_match = false;
           uni_failed = false;
           uni = 0;
+          mCnt = 0;
+          mokCnt = 0
           bGroup = false;
           continue;
         }
@@ -79,8 +90,9 @@ var nfs4_acl_prototype = function() {
         if (type_i == 3) {
           if (uni_match && !uni_failed && !ignore_line) {
             if (rule.indexOf(this._acl.charAt(i)) >= 0) {
-              if (type == "A") return true;
-              if (type == "D") return false;
+              //if(type=="A") return true;
+              //if(type=="D") return false;
+              mokCnt++;
             }
           }
           line_i++;
@@ -89,6 +101,11 @@ var nfs4_acl_prototype = function() {
         }
         line_i++;
         i++;
+      }
+
+      if (mokCnt > 0 && (rule.length == mokCnt)) {
+        if (type == "A") return true;
+        if (type == "D") return false;
       }
       return false;
 
