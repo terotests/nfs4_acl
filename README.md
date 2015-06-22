@@ -90,7 +90,7 @@ acl.denyGroup("abcd", "waxTC");
 ## Reading the ACL as String
 
 ```javascript
-acl.getACL();
+var resultStr = acl.getACL();
 ```
 
 
