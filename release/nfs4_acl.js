@@ -23,7 +23,6 @@ var nfs4_acl_prototype = function() {
            A:g:GROUP@:rtncy
            D:g:GROUP@:waxTC
            */
-      debugger;
 
       while (i < length) {
 
