@@ -113,16 +113,6 @@ var nfs4_acl_prototype = function() {
       _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
     if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
     _myTrait_.__traitInit.push(function(aclFile) {
-      /*
-A::OWNER@:rwatTnNcCy
-A::alice@nfsdomain.org:rxtncy
-A::bob@nfsdomain.org:rwadtTnNcCy
-A:g:GROUP@:rtncy
-D:g:GROUP@:waxTC
-A::EVERYONE@:rtncy
-D::EVERYONE@:waxTC
-*/
-
       this._acl = aclFile;
 
       // type:flags:principal:permissions
