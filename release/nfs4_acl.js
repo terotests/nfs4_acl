@@ -429,10 +429,6 @@
   };
   nfs4_acl.prototype = new nfs4_acl_prototype();
 
-  // exp nfs4_acl here
-
-  // exp  here nfs4_acl.js
-
   (function () {
     if (typeof define !== "undefined" && define !== null && define.amd != null) {
       __amdDefs__["nfs4_acl"] = nfs4_acl;
@@ -443,7 +439,6 @@
       this.nfs4_acl = nfs4_acl;
     }
   }).call(new Function("return this")());
-  // window["nfs4_acl"] = nfs4_acl;
 
   if (typeof define !== "undefined" && define !== null && define.amd != null) {
     define(__amdDefs__);
