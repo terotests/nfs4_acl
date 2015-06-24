@@ -133,7 +133,7 @@ MIT
 
 
    
-## Class nfs4_acl
+#### Class nfs4_acl
 
 
 - [addPermission](README.md#nfs4_acl_addPermission)
@@ -166,7 +166,7 @@ MIT
 
 
    
-#### Class nfs4_acl
+# Class nfs4_acl
 
 
 The class has following internal singleton variables:
