@@ -431,6 +431,20 @@
 
   // exp nfs4_acl here
 
+  // exp  here nfs4_acl.js
+
+  (function () {
+    if (typeof define !== "undefined" && define !== null && define.amd != null) {
+      __amdDefs__["nfs4_acl"] = nfs4_acl;
+      this.nfs4_acl = nfs4_acl;
+    } else if (typeof module !== "undefined" && module !== null && module.exports != null) {
+      module.exports["nfs4_acl"] = nfs4_acl;
+    } else {
+      this.nfs4_acl = nfs4_acl;
+    }
+  }).call(new Function("return this")());
+  // window["nfs4_acl"] = nfs4_acl;
+
   if (typeof define !== "undefined" && define !== null && define.amd != null) {
     define(__amdDefs__);
   }
