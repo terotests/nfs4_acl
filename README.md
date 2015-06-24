@@ -120,17 +120,59 @@ MIT
 
 
 
+
+
+
+
+
+
+
    
+
+ 
 
 
    
 ## Class nfs4_acl
 
 
+- [addPermission](README.md#nfs4_acl_addPermission)
+- [allowGroup](README.md#nfs4_acl_allowGroup)
+- [allowUser](README.md#nfs4_acl_allowUser)
+- [denyGroup](README.md#nfs4_acl_denyGroup)
+- [denyUser](README.md#nfs4_acl_denyUser)
+- [filter](README.md#nfs4_acl_filter)
+- [find](README.md#nfs4_acl_find)
+- [fromObject](README.md#nfs4_acl_fromObject)
+- [getACL](README.md#nfs4_acl_getACL)
+- [has](README.md#nfs4_acl_has)
+- [map](README.md#nfs4_acl_map)
+- [push](README.md#nfs4_acl_push)
+- [reduce](README.md#nfs4_acl_reduce)
+- [removeAll](README.md#nfs4_acl_removeAll)
+- [removePermission](README.md#nfs4_acl_removePermission)
+- [replaceLines](README.md#nfs4_acl_replaceLines)
+- [toObject](README.md#nfs4_acl_toObject)
+
+
+
+   
+
+
+   
+
+
+
+
+
+   
+#### Class nfs4_acl
+
+
 The class has following internal singleton variables:
         
         
-### nfs4_acl::addPermission(obj, flags)
+### <a name="nfs4_acl_addPermission"></a>nfs4_acl::addPermission(obj, flags)
 
 
 ```javascript
@@ -142,7 +184,7 @@ for(var i=0; i<flags.length;i++) {
 }
 ```
 
-### nfs4_acl::allowGroup(groupName, flag)
+### <a name="nfs4_acl_allowGroup"></a>nfs4_acl::allowGroup(groupName, flag)
 
 
 ```javascript
@@ -165,7 +207,7 @@ if(!did) {
 }
 ```
 
-### nfs4_acl::allowUser(username, flag)
+### <a name="nfs4_acl_allowUser"></a>nfs4_acl::allowUser(username, flag)
 
 
 ```javascript
@@ -191,7 +233,7 @@ if(!did) {
 
 ```
 
-### nfs4_acl::denyGroup(groupName, flag)
+### <a name="nfs4_acl_denyGroup"></a>nfs4_acl::denyGroup(groupName, flag)
 
 
 ```javascript
@@ -214,7 +256,7 @@ if(!did) {
 }
 ```
 
-### nfs4_acl::denyUser(username, flag)
+### <a name="nfs4_acl_denyUser"></a>nfs4_acl::denyUser(username, flag)
 
 
 ```javascript
@@ -240,7 +282,7 @@ if(!did) {
 
 ```
 
-### nfs4_acl::filter(fn)
+### <a name="nfs4_acl_filter"></a>nfs4_acl::filter(fn)
 
 
 ```javascript
@@ -251,28 +293,28 @@ this._acl = list.join("\n");
 return this;
 ```
 
-### nfs4_acl::find(username, rolename, rule)
+### <a name="nfs4_acl_find"></a>nfs4_acl::find(username, rolename, rule)
 
 
 ```javascript
 return this.has( username, rolename, rule);
 ```
 
-### nfs4_acl::fromObject(obj)
+### <a name="nfs4_acl_fromObject"></a>nfs4_acl::fromObject(obj)
 
 
 ```javascript
 return obj.type+":"+obj.flags+":"+obj.principal+":"+obj.permissions;
 ```
 
-### nfs4_acl::getACL(t)
+### <a name="nfs4_acl_getACL"></a>nfs4_acl::getACL(t)
 
 
 ```javascript
 return this._acl;
 ```
 
-### nfs4_acl::has(username, rolename, rule)
+### <a name="nfs4_acl_has"></a>nfs4_acl::has(username, rolename, rule)
 
 
 ```javascript
@@ -377,7 +419,7 @@ return false;
 ```
 
 ### nfs4_acl::constructor( aclFile )
-
+Initialize the ACL with new file
 ```javascript
 this._acl = aclFile.trim();
 
@@ -391,7 +433,7 @@ POSIX user/group/other distinctions used in, e.g., chmod(1).
 */
 ```
         
-### nfs4_acl::map(fn)
+### <a name="nfs4_acl_map"></a>nfs4_acl::map(fn)
 
 
 ```javascript
@@ -405,7 +447,7 @@ return this;
 
 ```
 
-### nfs4_acl::push(line)
+### <a name="nfs4_acl_push"></a>nfs4_acl::push(line)
 
 
 ```javascript
@@ -421,7 +463,7 @@ if( (len == 0) || this._acl.charAt(len-1)=="\n") {
 this._acl = this._acl.trim();
 ```
 
-### nfs4_acl::reduce(fn, initialValue)
+### <a name="nfs4_acl_reduce"></a>nfs4_acl::reduce(fn, initialValue)
 
 
 ```javascript
@@ -432,14 +474,14 @@ this._acl = list.join("\n");
 return this;
 ```
 
-### nfs4_acl::removeAll(t)
+### <a name="nfs4_acl_removeAll"></a>nfs4_acl::removeAll(t)
 
 
 ```javascript
 this._acl = "";
 ```
 
-### nfs4_acl::removePermission(obj, flags)
+### <a name="nfs4_acl_removePermission"></a>nfs4_acl::removePermission(obj, flags)
 
 
 ```javascript
@@ -454,7 +496,7 @@ for(var i=0; i<flags.length;i++) {
 
 ```
 
-### nfs4_acl::replaceLines(fn)
+### <a name="nfs4_acl_replaceLines"></a>nfs4_acl::replaceLines(fn)
 
 
 ```javascript
@@ -468,7 +510,7 @@ for(var i=0; i<list.length;i++) {
 
 ```
 
-### nfs4_acl::toObject(line)
+### <a name="nfs4_acl_toObject"></a>nfs4_acl::toObject(line)
 
 
 ```javascript
