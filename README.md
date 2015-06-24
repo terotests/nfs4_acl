@@ -130,7 +130,7 @@ MIT
 The class has following internal singleton variables:
         
         
-### addPermission(obj, flags)
+### nfs4_acl::addPermission(obj, flags)
 
 
 ```javascript
@@ -142,7 +142,7 @@ for(var i=0; i<flags.length;i++) {
 }
 ```
 
-### allowGroup(groupName, flag)
+### nfs4_acl::allowGroup(groupName, flag)
 
 
 ```javascript
@@ -165,7 +165,7 @@ if(!did) {
 }
 ```
 
-### allowUser(username, flag)
+### nfs4_acl::allowUser(username, flag)
 
 
 ```javascript
@@ -191,7 +191,7 @@ if(!did) {
 
 ```
 
-### denyGroup(groupName, flag)
+### nfs4_acl::denyGroup(groupName, flag)
 
 
 ```javascript
@@ -214,7 +214,7 @@ if(!did) {
 }
 ```
 
-### denyUser(username, flag)
+### nfs4_acl::denyUser(username, flag)
 
 
 ```javascript
@@ -240,7 +240,7 @@ if(!did) {
 
 ```
 
-### filter(fn)
+### nfs4_acl::filter(fn)
 
 
 ```javascript
@@ -251,28 +251,28 @@ this._acl = list.join("\n");
 return this;
 ```
 
-### find(username, rolename, rule)
+### nfs4_acl::find(username, rolename, rule)
 
 
 ```javascript
 return this.has( username, rolename, rule);
 ```
 
-### fromObject(obj)
+### nfs4_acl::fromObject(obj)
 
 
 ```javascript
 return obj.type+":"+obj.flags+":"+obj.principal+":"+obj.permissions;
 ```
 
-### getACL(t)
+### nfs4_acl::getACL(t)
 
 
 ```javascript
 return this._acl;
 ```
 
-### has(username, rolename, rule)
+### nfs4_acl::has(username, rolename, rule)
 
 
 ```javascript
@@ -376,7 +376,7 @@ return false;
 
 ```
 
-### constructor( aclFile )
+### nfs4_acl::constructor( aclFile )
 
 ```javascript
 this._acl = aclFile.trim();
@@ -391,7 +391,7 @@ POSIX user/group/other distinctions used in, e.g., chmod(1).
 */
 ```
         
-### map(fn)
+### nfs4_acl::map(fn)
 
 
 ```javascript
@@ -405,7 +405,7 @@ return this;
 
 ```
 
-### push(line)
+### nfs4_acl::push(line)
 
 
 ```javascript
@@ -421,7 +421,7 @@ if( (len == 0) || this._acl.charAt(len-1)=="\n") {
 this._acl = this._acl.trim();
 ```
 
-### reduce(fn, initialValue)
+### nfs4_acl::reduce(fn, initialValue)
 
 
 ```javascript
@@ -432,14 +432,14 @@ this._acl = list.join("\n");
 return this;
 ```
 
-### removeAll(t)
+### nfs4_acl::removeAll(t)
 
 
 ```javascript
 this._acl = "";
 ```
 
-### removePermission(obj, flags)
+### nfs4_acl::removePermission(obj, flags)
 
 
 ```javascript
@@ -454,7 +454,7 @@ for(var i=0; i<flags.length;i++) {
 
 ```
 
-### replaceLines(fn)
+### nfs4_acl::replaceLines(fn)
 
 
 ```javascript
@@ -468,7 +468,7 @@ for(var i=0; i<list.length;i++) {
 
 ```
 
-### toObject(line)
+### nfs4_acl::toObject(line)
 
 
 ```javascript
