@@ -429,7 +429,7 @@
   };
   nfs4_acl.prototype = new nfs4_acl_prototype();
 
-  // exp here
+  // exp nfs4_acl here
 
   if (typeof define !== "undefined" && define !== null && define.amd != null) {
     define(__amdDefs__);
